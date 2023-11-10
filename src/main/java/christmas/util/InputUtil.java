@@ -10,10 +10,11 @@ import java.util.regex.Pattern;
 public class InputUtil {
 
     private static final String ERROR_INPUT_NUMBER_TYPE_MESSAGE = "숫자만 입력해주세요.";
-    private static final String ERROR_INPUT_COMMA_MESSAGE = "유효하지 않은 입력입니다.";
+    private static final String ERROR_INPUT_COMMA_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
     private static final String REGEX = "^[0-9가-힣-]*$";
     private static final String COMMA = ",";
     private static final String HYPHEN = "-";
+    private static final Map<String, Integer> map = new HashMap<>();
 
     public static int inputOrderDate(String date) {
         return stringToInt(date);
@@ -31,12 +32,19 @@ public class InputUtil {
     }
 
     private static Map<String, Integer> splitByHyphen(List<String> list) {
-        Map<String, Integer> map = new HashMap<>();
-        list.stream().map(element -> element.split(HYPHEN)).forEach(split -> {
+        for (String element : list) {
+            String[] split = element.split(HYPHEN);
+            validateDuplicationString(split[0]);
             int count = stringToInt(split[1]);
             map.put(split[0], count);
-        });
+        }
         return map;
+    }
+
+    private static void validateDuplicationString(String s) {
+        if (map.containsKey(s)) {
+            throw new IllegalArgumentException(ERROR_INPUT_COMMA_MESSAGE);
+        }
     }
 
     private static int stringToInt(String s) {

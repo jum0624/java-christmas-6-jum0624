@@ -1,11 +1,8 @@
 package christmas.util;
 
-import christmas.util.InputUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import java.util.regex.Pattern;
 
 public class InputUtilTest {
     @Test
@@ -67,5 +64,18 @@ public class InputUtilTest {
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("유효하지 않은 입력입니다.");
+    }
+
+    @Test
+    @DisplayName("중복된 메뉴를 입력한 경우 예외가 발생한다.")
+    public void validateDuplicateMenuExceptionTest() throws Exception {
+        // given
+        String input = "제로콜라-1,제로콜라-1";
+
+        // when
+        // then
+        Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 }
