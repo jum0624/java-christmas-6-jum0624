@@ -26,7 +26,7 @@ public class InputUtil {
 
     private static List<String> splitByComma(String s) {
         String[] split = s.split(COMMA);
-        Arrays.stream(split).forEach(InputUtil::validateCheckComma);
+        Arrays.stream(split).forEach(InputUtil::validateCheckPattern);
         return List.of(split);
     }
 
@@ -47,7 +47,7 @@ public class InputUtil {
         }
     }
 
-    private static void validateCheckComma(String s) {
+    private static void validateCheckPattern(String s) {
         Pattern pattern = Pattern.compile(REGEX);
         Matcher matcher = pattern.matcher(s);
 
