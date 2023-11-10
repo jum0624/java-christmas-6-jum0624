@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Date {
 
-    private static final String ERROR_DAY_RANGE_MESSAGE = "1일 ~ 31일 이내의 값만 입력해주세요.";
+    private static final String ERROR_DAY_RANGE_MESSAGE = "유효하지 않은 날짜입니다. 다시 입력해 주세요.";
     private static final int MIN_DAY = 1;
     private static final int MAX_DAY = 31;
     private int day;

@@ -16,11 +16,11 @@ public class DateTest {
         // then
         Assertions.assertThatThrownBy(() -> new Date(day1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1일 ~ 31일 이내의 값만 입력해주세요.");
+                .hasMessage("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
 
         Assertions.assertThatThrownBy(() -> new Date(day2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("1일 ~ 31일 이내의 값만 입력해주세요.");
+                .hasMessage("유효하지 않은 날짜입니다. 다시 입력해 주세요.");
     }
 
     @Test
