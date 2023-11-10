@@ -7,13 +7,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class InputUtil {
+import static christmas.constant.ExceptionMessage.*;
+import static christmas.constant.StringConstant.*;
 
-    private static final String ERROR_INPUT_NUMBER_TYPE_MESSAGE = "숫자만 입력해주세요.";
-    private static final String ERROR_INPUT_COMMA_MESSAGE = "유효하지 않은 주문입니다. 다시 입력해 주세요.";
-    private static final String REGEX = "^[0-9가-힣-]*$";
-    private static final String COMMA = ",";
-    private static final String HYPHEN = "-";
+public class InputUtil {
     private static final Map<String, Integer> map = new HashMap<>();
 
     public static int inputOrderDate(String date) {
@@ -26,14 +23,14 @@ public class InputUtil {
     }
 
     private static List<String> splitByComma(String s) {
-        String[] split = s.split(COMMA);
+        String[] split = s.split(COMMA.getMessage());
         Arrays.stream(split).forEach(InputUtil::validateCheckPattern);
         return List.of(split);
     }
 
     private static Map<String, Integer> splitByHyphen(List<String> list) {
         for (String element : list) {
-            String[] split = element.split(HYPHEN);
+            String[] split = element.split(HYPHEN.getMessage());
             validateDuplicationString(split[0]);
             int count = stringToInt(split[1]);
             map.put(split[0], count);
@@ -43,7 +40,7 @@ public class InputUtil {
 
     private static void validateDuplicationString(String s) {
         if (map.containsKey(s)) {
-            throw new IllegalArgumentException(ERROR_INPUT_COMMA_MESSAGE);
+            throw new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage());
         }
     }
 
@@ -51,16 +48,16 @@ public class InputUtil {
         try {
             return Integer.parseInt(s);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ERROR_INPUT_NUMBER_TYPE_MESSAGE);
+            throw new IllegalArgumentException(ERROR_INPUT_NUMBER_TYPE_MESSAGE.getMessage());
         }
     }
 
     private static void validateCheckPattern(String s) {
-        Pattern pattern = Pattern.compile(REGEX);
+        Pattern pattern = Pattern.compile(REGEX.getMessage());
         Matcher matcher = pattern.matcher(s);
 
         if (!matcher.matches()) {
-            throw new IllegalArgumentException(ERROR_INPUT_COMMA_MESSAGE);
+            throw new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage());
         }
     }
 }
