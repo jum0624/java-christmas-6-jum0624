@@ -14,10 +14,6 @@ import static christmas.constant.StringConstant.*;
 public class InputUtil {
     private static Map<String, Integer> map;
 
-    public static int inputOrderDate(String date) {
-        return stringToInt(date);
-    }
-
     public static Map<String, Integer> inputOrderMenu(String input) {
         List<String> menus = splitByComma(input);
         return splitByHyphen(menus);

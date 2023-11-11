@@ -6,20 +6,6 @@ import org.junit.jupiter.api.Test;
 
 public class InputUtilTest {
     @Test
-    @DisplayName("입력 시, 숫자가 아닌 경우 예외가 발생한다.")
-    public void inputOrderDateTest() throws Exception {
-        // given
-        String input = "가나다";
-
-        // when
-
-        // then
-        Assertions.assertThatThrownBy(() -> InputUtil.inputOrderDate(input))
-                .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("[ERROR] 숫자만 입력해주세요.");
-    }
-
-    @Test
     @DisplayName("입력 시 ,를 기준으로 입력하지 않았을 경우, 예외가 발생한다.")
     public void inputCommaExceptionTest() throws Exception {
         // given
