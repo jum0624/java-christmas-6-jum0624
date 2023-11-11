@@ -16,7 +16,7 @@ public class InputUtilTest {
         // then
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderDate(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자만 입력해주세요.");
+                .hasMessage("[ERROR] 숫자만 입력해주세요.");
     }
 
     @Test
@@ -31,13 +31,13 @@ public class InputUtilTest {
         // then
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input1))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("유효하지 않은 입력입니다.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input2))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("유효하지 않은 입력입니다.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input3))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("유효하지 않은 입력입니다.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     @Test
@@ -50,7 +50,7 @@ public class InputUtilTest {
         // then
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("숫자만 입력해주세요.");
+                .hasMessage("[ERROR] 숫자만 입력해주세요.");
     }
 
     @Test
@@ -63,7 +63,7 @@ public class InputUtilTest {
         // then
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("유효하지 않은 입력입니다.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
     }
 
     @Test
@@ -76,6 +76,19 @@ public class InputUtilTest {
         // then
         Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessage("유효하지 않은 주문입니다. 다시 입력해 주세요.");
+                .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
+    @Test
+    @DisplayName("메뉴 갯수를 1개 이하로 입력한 경우 예외가 발생한다.")
+    public void validateMenuCountRangeExceptionTest() throws Exception {
+        // given
+        String input = "양송이수프-1,제로콜라-0";
+
+        // when
+        // then
+        Assertions.assertThatThrownBy(() -> InputUtil.inputOrderMenu(input))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessage("[ERROR] 메뉴의 개수는 1 이상의 숫자만 입력되도록 해주세요.");
     }
 }
