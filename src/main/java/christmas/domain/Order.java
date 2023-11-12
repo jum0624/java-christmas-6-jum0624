@@ -1,4 +1,4 @@
-package christmas;
+package christmas.domain;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,6 +37,10 @@ public class Order {
 
     public Map<Menu, Integer> getOrders() {
         return orders;
+    }
+
+    public int getDiscountTotalPrice(int discountPrice) {
+        return totalPrice + discountPrice;
     }
 
     public int getTotalPrice() {

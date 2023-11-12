@@ -1,5 +1,6 @@
 package christmas;
 
+import christmas.domain.Order;
 import christmas.util.InputUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
