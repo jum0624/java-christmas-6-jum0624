@@ -12,7 +12,7 @@ import static christmas.constant.NumberConstant.MIN_MENU_COUNT;
 import static christmas.constant.StringConstant.*;
 
 public class InputUtil {
-    private static Map<String, Integer> map;
+    private static Map<String, Integer> orders;
 
     public static Map<String, Integer> inputOrderMenu(String input) {
         List<String> menus = splitByComma(input);
@@ -26,19 +26,19 @@ public class InputUtil {
     }
 
     private static Map<String, Integer> splitByHyphen(List<String> list) {
-        map = new HashMap<>();
+        orders = new HashMap<>();
         for (String element : list) {
             String[] split = element.split(HYPHEN.getMessage());
             validateDuplicationString(split[0]);
             int count = stringToInt(split[1]);
             validateNumberRange(count);
-            map.put(split[0], count);
+            orders.put(split[0], count);
         }
-        return map;
+        return orders;
     }
 
     private static void validateDuplicationString(String s) {
-        if (map.containsKey(s)) {
+        if (orders.containsKey(s)) {
             throw new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage());
         }
     }
@@ -53,7 +53,7 @@ public class InputUtil {
         try {
             return Integer.parseInt(s);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException(ERROR_INPUT_NUMBER_TYPE_MESSAGE.getMessage());
+            throw new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage());
         }
     }
 
