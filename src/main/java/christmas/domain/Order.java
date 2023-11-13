@@ -17,7 +17,6 @@ public class Order {
         this.totalCount = 0;
         this.totalPrice = 0;
         createOrder(order);
-        calculateTotalPrice();
         validateMenuCategory();
     }
 
@@ -44,6 +43,7 @@ public class Order {
     }
 
     public int getTotalPrice() {
+        calculateTotalPrice();
         return totalPrice;
     }
 
@@ -53,6 +53,7 @@ public class Order {
     }
 
     private void calculateTotalPrice() {
+        totalPrice = 0;
         orders.entrySet().forEach(menu -> {
             Menu menuName = menu.getKey();
             Integer count = menu.getValue();

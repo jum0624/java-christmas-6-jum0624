@@ -26,6 +26,7 @@ public class GiveawayDiscountPolicy implements DiscountPolicy {
     @Override
     public int discount() {
         if (isDiscount() && isPriceOver()) {
+            order.getOrders().put(Menu.MENU12, 1);
             return -25000;
         }
         return 0;
