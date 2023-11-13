@@ -6,7 +6,7 @@ import christmas.domain.Date;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 
-import java.util.List;
+import java.util.Map;
 
 public class DiscountService {
 
@@ -32,9 +32,9 @@ public class DiscountService {
         return menu.getMenuName() + " 1개";
     }
 
-    public List<String> getBenefitDetail(List<String> benefit) {
+    public Map<String, Integer> getBenefitDetail(Map<String, Integer> benefit) {
         if (benefit.size() == 0) {
-            benefit.add("없음");
+            benefit.put(null, null);
         }
         return benefit;
     }

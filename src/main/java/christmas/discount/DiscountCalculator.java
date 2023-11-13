@@ -4,19 +4,19 @@ import christmas.domain.Date;
 import christmas.domain.Menu;
 import christmas.domain.Order;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class DiscountCalculator {
     private DiscountPolicy discountPolicy;
-    private final List<String> discountList;
+    private final Map<String, Integer> discountList;
     private int totalDiscount;
     private Menu product;
 
     public DiscountCalculator() {
         this.totalDiscount = 0;
         this.product = Menu.NOT_EXIST;
-        this.discountList = new ArrayList<>();
+        this.discountList = new HashMap<>();
     }
 
     public void discountChristmas(Date date, Order order) {
@@ -64,11 +64,11 @@ public class DiscountCalculator {
 
     private void saveDiscountList(int discount) {
         if (discount != 0) {
-            discountList.add(discountPolicy.toStringDiscount());
+            discountList.put(discountPolicy.toStringDiscount(), discount);
         }
     }
 
-    public List<String> getDiscountList() {
+    public Map<String, Integer> getDiscountList() {
         return discountList;
     }
 

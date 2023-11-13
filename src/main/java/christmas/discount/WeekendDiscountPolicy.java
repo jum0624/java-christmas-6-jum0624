@@ -40,7 +40,7 @@ public class WeekendDiscountPolicy implements DiscountPolicy {
 
     @Override
     public String toStringDiscount() {
-        return "주말 할인: " + discount();
+        return "주말 할인";
     }
 
     private boolean isDateOfWeek() {

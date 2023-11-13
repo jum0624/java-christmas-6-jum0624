@@ -3,7 +3,6 @@ package christmas.view;
 import christmas.domain.Badge;
 import christmas.domain.Menu;
 
-import java.util.List;
 import java.util.Map;
 
 import static christmas.constant.StringConstant.*;
@@ -27,9 +26,16 @@ public class OutputView {
         System.out.println();
     }
 
-    public void showBenefitDetails(List<String> benefitDetails) {
+    public void showBenefitDetails(Map<String, Integer> benefitDetails) {
         System.out.print(PRINT_DISCOUNT_LIST_MESSAGE.getMessage());
-        benefitDetails.forEach(System.out::println);
+        for (Map.Entry<String, Integer> benefit : benefitDetails.entrySet()
+        ) {
+            if (benefit.getKey() == null) {
+                System.out.print("없음");
+                break;
+            }
+            System.out.printf("%s : %,d원\n", benefit.getKey(), benefit.getValue());
+        }
         System.out.println();
     }
 

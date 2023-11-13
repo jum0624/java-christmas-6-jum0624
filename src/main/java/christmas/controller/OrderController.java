@@ -9,7 +9,6 @@ import christmas.util.InputUtil;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.List;
 import java.util.Map;
 
 import static christmas.constant.StringConstant.*;
@@ -38,7 +37,7 @@ public class OrderController {
         DiscountCalculator discountCalculator = discountService.discountEvent(date, order);
         Menu product = discountCalculator.getProduct();
         outputView.showGiveawayMenu(discountService.getProduct(product));
-        List<String> benefits = discountCalculator.getDiscountList();
+        Map<String, Integer> benefits = discountCalculator.getDiscountList();
         outputView.showBenefitDetails(discountService.getBenefitDetail(benefits));
         int totalDiscount = discountCalculator.getTotalDiscount();
         outputView.showTotalDiscountPrice(discountCalculator.getTotalDiscount());

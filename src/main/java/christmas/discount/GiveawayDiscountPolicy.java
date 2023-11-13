@@ -33,7 +33,7 @@ public class GiveawayDiscountPolicy implements DiscountPolicy {
 
     @Override
     public String toStringDiscount() {
-        return "증정 이벤트: " + discount();
+        return "증정 이벤트";
     }
 
     public String getProduct() {

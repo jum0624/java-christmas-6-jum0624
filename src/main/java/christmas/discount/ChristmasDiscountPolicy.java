@@ -36,6 +36,6 @@ public class ChristmasDiscountPolicy implements DiscountPolicy {
 
     @Override
     public String toStringDiscount() {
-        return "크리스마스 디데이 할인: " + discount();
+        return "크리스마스 디데이 할인";
     }
 }

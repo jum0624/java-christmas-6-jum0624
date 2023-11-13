@@ -32,6 +32,6 @@ public class SpecialDiscountPolicy implements DiscountPolicy {
 
     @Override
     public String toStringDiscount() {
-        return "특별 할인: " + discount();
+        return "특별 할인";
     }
 }
