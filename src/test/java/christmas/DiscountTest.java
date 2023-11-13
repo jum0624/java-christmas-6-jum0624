@@ -1,6 +1,6 @@
 package christmas;
 
-import christmas.discount.DiscountCalculator;
+import christmas.discount.DiscountEvent;
 import christmas.domain.Date;
 import christmas.domain.Order;
 import christmas.service.DiscountService;
@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 public class DiscountTest {
-    private DiscountService discountService = new DiscountService(new DiscountCalculator());
+    private DiscountService discountService = new DiscountService(new DiscountEvent());
     @Test
     @DisplayName("메뉴 주문 시 이벤트에 따른 할인 혜택이 적용된다.")
     public void discountTest1() throws Exception {
@@ -24,7 +24,7 @@ public class DiscountTest {
         Order order = Order.of(orders);
 
         // when
-        DiscountCalculator discountCalculator = discountService.discountEvent(date, order);
+        DiscountEvent discountCalculator = discountService.discountEvent(date, order);
 
         // then
         Assertions.assertThat(discountCalculator.getTotalDiscount()).isEqualTo(-31246);
@@ -41,9 +41,26 @@ public class DiscountTest {
         Order order = Order.of(orders);
 
         // when
-        DiscountCalculator discountCalculator = discountService.discountEvent(date, order);
+        DiscountEvent discountCalculator = discountService.discountEvent(date, order);
 
         // then
         Assertions.assertThat(discountCalculator.getTotalDiscount()).isEqualTo(0);
+    }
+
+    @Test
+    @DisplayName("특별 할인 날짜인 경우 특별 할인이 적용된다.")
+    public void specialDiscountEventTest() throws Exception {
+        // given
+        String inputDate = "24";
+        String inputOrder = "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1";
+        Map<String, Integer> orders = InputUtil.inputOrderMenu(inputOrder);
+        Date date = Date.of(inputDate);
+        Order order = Order.of(orders);
+
+        // when
+        DiscountEvent discountCalculator = discountService.discountEvent(date, order);
+
+        // then
+        Assertions.assertThat(discountCalculator.getTotalDiscount()).isEqualTo(-33346);
     }
 }
