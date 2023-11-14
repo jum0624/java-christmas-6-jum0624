@@ -17,7 +17,13 @@ public enum StringConstant {
     PRINT_EVENT_BADGE_MESSAGE("<12월 이벤트 배지>\n"),
     PRINT_CONTENT_AND_COUNT("%s %d개\n"),
     PRINT_PRICE("%,d원\n"),
-    PRINT_DISCOUNT_LIST("%s: %,d원\n");
+    PRINT_DISCOUNT_LIST("%s: %,d원\n"),
+    NO_VALUE("없음\n"),
+    CHRISTMAS_DISCOUNT_POLICY("크리스마스 디데이 할인"),
+    WEEKDAY_DISCOUNT_POLICY("평일 할인"),
+    WEEKEND_DISCOUNT_POLICY("주말 할인"),
+    SPECIAL_DISCOUNT_POLICY("특별 할인"),
+    GIVEAWAY_DISCOUNT_POLICY("증정 이벤트");
 
     private String message;
 

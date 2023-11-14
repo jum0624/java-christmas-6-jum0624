@@ -26,11 +26,10 @@ public class Order {
 
     private void createOrder(Map<String, Integer> order) {
         orders = new HashMap<>();
-        order.entrySet().forEach(menu -> {
-            Menu orderedMenu = Menu.findByMenuName(menu.getKey());
-            validateCheckMenu(orderedMenu);
-            accountMenu(menu.getValue());
-            orders.put(orderedMenu, menu.getValue());
+        order.forEach((key, value) -> {
+            Menu orderedMenu = Menu.findByMenuName(key);
+            calculateMenuCount(value);
+            orders.put(orderedMenu, value);
         });
     }
 
@@ -47,7 +46,7 @@ public class Order {
         return totalPrice;
     }
 
-    private void accountMenu(int count) {
+    private void calculateMenuCount(int count) {
         this.totalCount += count;
         validateTotalMenuCountRange();
     }
@@ -61,10 +60,16 @@ public class Order {
         });
     }
 
-    private void validateCheckMenu(Menu menu) {
-        if (menu.isNotExist()) {
-            throw new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage());
-        }
+    public void updateOrder(Menu menu) {
+        orders.put(menu, 1);
+        totalPrice += menu.getPrice();
+    }
+
+    public int calculateCategoryCount(Category category) {
+        return  orders.entrySet()
+                .stream()
+                .filter(order -> order.getKey().getCategory() == category)
+                .mapToInt(Map.Entry::getValue).sum();
     }
 
     private void validateTotalMenuCountRange() {
