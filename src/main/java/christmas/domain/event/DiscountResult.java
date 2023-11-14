@@ -1,13 +1,15 @@
 package christmas.domain.event;
 
-import christmas.domain.order.Date;
 import christmas.domain.event.discountPolicy.DiscountPolicy;
+import christmas.domain.order.Date;
 import christmas.domain.order.Menu;
 import christmas.domain.order.Order;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static christmas.constant.StringConstant.GIVEAWAY_DISCOUNT_POLICY;
 
 public class DiscountResult {
     private String giftMenu;
@@ -39,7 +41,7 @@ public class DiscountResult {
     }
 
     private void isGiftMenu(String discountPolicyName, int discountPrice) {
-        if (discountPolicyName.contains("증정 이벤트") && discountPrice != 0) {
+        if (discountPolicyName.contains(GIVEAWAY_DISCOUNT_POLICY.getMessage()) && discountPrice != 0) {
             this.giftMenu = "샴페인 1개";
         }
     }

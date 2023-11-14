@@ -44,6 +44,18 @@ public class Order {
         return totalPrice;
     }
 
+    public void updateOrder(Menu menu) {
+        orders.put(menu, 1);
+        totalPrice += menu.getPrice();
+    }
+
+    public int calculateCategoryCount(Category category) {
+        return  orders.entrySet()
+                .stream()
+                .filter(order -> order.getKey().getCategory() == category)
+                .mapToInt(Map.Entry::getValue).sum();
+    }
+
     private void calculateMenuCount(int count) {
         this.totalCount += count;
         validateTotalMenuCountRange();
@@ -55,18 +67,6 @@ public class Order {
             Integer count = menu.getValue();
             totalPrice += menuName.getPrice() * count;
         });
-    }
-
-    public void updateOrder(Menu menu) {
-        orders.put(menu, 1);
-        totalPrice += menu.getPrice();
-    }
-
-    public int calculateCategoryCount(Category category) {
-        return  orders.entrySet()
-                .stream()
-                .filter(order -> order.getKey().getCategory() == category)
-                .mapToInt(Map.Entry::getValue).sum();
     }
 
     private void validateTotalMenuCountRange() {
