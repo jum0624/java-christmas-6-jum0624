@@ -11,7 +11,7 @@ public enum Calender {
     DAY25(25),
     DAY31(31);
 
-    private int day;
+    private final int day;
 
     Calender(int day) {
         this.day = day;

@@ -1,71 +1,66 @@
 package christmas.controller;
 
-import christmas.discount.DiscountCalculator;
+import christmas.domain.Badge;
 import christmas.domain.Date;
-import christmas.domain.Menu;
-import christmas.domain.Order;
-import christmas.service.DiscountService;
+import christmas.domain.DiscountResult;
+import christmas.domain.order.Order;
+import christmas.service.OrderService;
 import christmas.util.InputUtil;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
 import java.util.Map;
 
-import static christmas.constant.StringConstant.*;
+import static christmas.constant.StringConstant.PREVIEW_MESSAGE;
+import static christmas.constant.StringConstant.START_MESSAGE;
 
 public class OrderController {
     private final InputView inputView;
     private final OutputView outputView;
-    private final DiscountService discountService;
+    private final OrderService orderService;
 
-    public OrderController(InputView inputView, OutputView outputView, DiscountService discountService) {
+    public OrderController(InputView inputView, OutputView outputView, OrderService orderService) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.discountService = discountService;
+        this.orderService = orderService;
     }
 
     public void run() {
         System.out.print(START_MESSAGE.getMessage());
-        Date date = inputDate();
-        Order order = inputOrder();
-
+        Date date = createDate();
+        Order order = createOrder();
         System.out.println(PREVIEW_MESSAGE.getMessage());
         outputView.showOrder(order.getOrders());
-        System.out.println();
         outputView.showBeforeDiscountTotalPrice(order.getTotalPrice());
 
-        DiscountCalculator discountCalculator = discountService.discountEvent(date, order);
-        Menu product = discountCalculator.getProduct();
-        outputView.showGiveawayMenu(discountService.getProduct(product));
-        Map<String, Integer> benefits = discountCalculator.getDiscountList();
-        outputView.showBenefitDetails(discountService.getBenefitDetail(benefits));
-        int totalDiscount = discountCalculator.getTotalDiscount();
-        outputView.showTotalDiscountPrice(discountCalculator.getTotalDiscount());
-        outputView.showAfterDiscountPrice(discountService.getAfterDiscountTotalPrice(order));
-        outputView.showEventBadge(discountService.badgeEvent(-totalDiscount));
+        DiscountResult discountResult = orderService.discount(date, order);
+        outputView.showGiveawayMenu(discountResult.getGiftMenu());
+        outputView.showBenefitDetails(discountResult.getBenefitDetails());
+        int totalDiscount = discountResult.getTotalDiscountPrice();
+        outputView.showTotalDiscountPrice(totalDiscount);
+        outputView.showAfterDiscountPrice(order.getDiscountTotalPrice(totalDiscount));
+        Badge badge = orderService.getBadge(-totalDiscount);
+        outputView.showEventBadge(badge);
     }
 
-    // 고객에게 날짜 정보 받아오기
-    public Date inputDate() {
+    public Date createDate() {
         try {
             String date = inputView.inputDateView();
             return Date.of(date);
         } catch (IllegalArgumentException e) {
             System.out.print(e.getMessage());
-            return inputDate();
+            return createDate();
         }
     }
 
-    // 고객에게 주문 정보 받아오기
-    public Order inputOrder() {
+    public Order createOrder() {
         try {
             String order = inputView.inputOrderView();
             Map<String, Integer> orders = InputUtil.inputOrderMenu(order);
             return Order.of(orders);
         } catch (IllegalArgumentException e) {
             System.out.print(e.getMessage());
-            return inputOrder();
+            return createOrder();
         }
-
     }
 }

@@ -1,9 +1,7 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static christmas.constant.ExceptionMessage.ERROR_INPUT_ORDER_MESSAGE;
 import static christmas.constant.NumberConstant.MAX_MENU_COUNT;
@@ -17,6 +15,7 @@ public class Order {
         this.totalCount = 0;
         this.totalPrice = 0;
         createOrder(order);
+        calculateTotalPrice();
         validateMenuCategory();
     }
 
@@ -38,11 +37,10 @@ public class Order {
     }
 
     public int getDiscountTotalPrice(int discountPrice) {
-        return totalPrice + discountPrice;
+        return getTotalPrice() + discountPrice;
     }
 
     public int getTotalPrice() {
-        calculateTotalPrice();
         return totalPrice;
     }
 
@@ -52,7 +50,6 @@ public class Order {
     }
 
     private void calculateTotalPrice() {
-        totalPrice = 0;
         orders.entrySet().forEach(menu -> {
             Menu menuName = menu.getKey();
             Integer count = menu.getValue();
@@ -79,11 +76,7 @@ public class Order {
     }
 
     private void validateMenuCategory() {
-        Set<Category> set = orders.keySet()
-                .stream()
-                .map(Menu::getCategory)
-                .collect(Collectors.toSet());
-        if (set.size() == 1 && set.contains(Category.DRINK)) {
+        if (Category.isOnlyDrink(orders)) {
             throw new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage());
         }
     }

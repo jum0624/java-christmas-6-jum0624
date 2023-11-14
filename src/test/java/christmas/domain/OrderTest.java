@@ -1,6 +1,7 @@
-package christmas;
+package christmas.domain;
 
-import christmas.domain.Order;
+import christmas.domain.order.Menu;
+import christmas.domain.order.Order;
 import christmas.util.InputUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -49,5 +50,22 @@ public class OrderTest {
         Assertions.assertThatThrownBy(() -> Order.of(orderMenu))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessage("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+    }
+
+    @Test
+    @DisplayName("메뉴를 주문한다.")
+    public void createOrderTest() throws Exception {
+        // given
+        String input = "티본스테이크-1,바비큐립-1";
+        Map<String, Integer> orderMenu = InputUtil.inputOrderMenu(input);
+
+        // when
+        Order order = Order.of(orderMenu);
+        Map<Menu, Integer> orders = order.getOrders();
+
+        // then
+        Assertions.assertThat(order.getOrders()).isNotEmpty()
+                .containsKey(Menu.MENU4)
+                .containsKey(Menu.MENU5);
     }
 }

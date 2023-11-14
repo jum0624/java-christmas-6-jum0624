@@ -1,9 +1,8 @@
-package christmas;
+package christmas.domain;
 
-import christmas.discount.DiscountEvent;
-import christmas.domain.Date;
-import christmas.domain.Order;
-import christmas.service.DiscountService;
+import christmas.config.ApplicationConfig;
+import christmas.domain.order.Order;
+import christmas.service.OrderService;
 import christmas.util.InputUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -12,7 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 public class DiscountTest {
-    private DiscountService discountService = new DiscountService(new DiscountEvent());
+    private final ApplicationConfig applicationConfig = new ApplicationConfig();
+    private final OrderService orderService = new OrderService(applicationConfig.discountPolicy());
     @Test
     @DisplayName("메뉴 주문 시 이벤트에 따른 할인 혜택이 적용된다.")
     public void discountTest1() throws Exception {
@@ -24,10 +24,10 @@ public class DiscountTest {
         Order order = Order.of(orders);
 
         // when
-        DiscountEvent discountCalculator = discountService.discountEvent(date, order);
+        DiscountResult discountResult = orderService.discount(date, order);
 
         // then
-        Assertions.assertThat(discountCalculator.getTotalDiscount()).isEqualTo(-31246);
+        Assertions.assertThat(discountResult.getTotalDiscountPrice()).isEqualTo(-31246);
     }
 
     @Test
@@ -41,10 +41,10 @@ public class DiscountTest {
         Order order = Order.of(orders);
 
         // when
-        DiscountEvent discountCalculator = discountService.discountEvent(date, order);
+        DiscountResult discountResult = orderService.discount(date, order);
 
         // then
-        Assertions.assertThat(discountCalculator.getTotalDiscount()).isEqualTo(0);
+        Assertions.assertThat(discountResult.getTotalDiscountPrice()).isEqualTo(0);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class DiscountTest {
         Order order = Order.of(orders);
 
         // when
-        DiscountEvent discountCalculator = discountService.discountEvent(date, order);
+        DiscountResult discountResult = orderService.discount(date, order);
 
         // then
-        Assertions.assertThat(discountCalculator.getTotalDiscount()).isEqualTo(-33346);
+        Assertions.assertThat(discountResult.getTotalDiscountPrice()).isEqualTo(-33346);
     }
 }
