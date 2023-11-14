@@ -1,9 +1,11 @@
-package christmas.domain;
+package christmas.domain.order;
 
 import java.util.Arrays;
 
+import static christmas.constant.ExceptionMessage.ERROR_INPUT_ORDER_MESSAGE;
+
 public enum Menu {
-    NOT_EXIST("존재하지 않는 음식", 0, null),
+    NOT_EXIST("없음", 0, Category.NOT_CATEGORY),
     MENU1("양송이수프", 6000, Category.APPETIZER),
     MENU2("타파스", 5500, Category.APPETIZER),
     MENU3("시저샐러드", 8000, Category.APPETIZER),
@@ -17,9 +19,9 @@ public enum Menu {
     MENU11("레드와인", 60000, Category.DRINK),
     MENU12("샴페인", 25000, Category.DRINK);
 
-    private String menuName;
-    private int price;
-    private Category category;
+    private final String menuName;
+    private final int price;
+    private final Category category;
 
     Menu(String menuName, int price, Category category) {
         this.menuName = menuName;
@@ -30,7 +32,8 @@ public enum Menu {
     public static Menu findByMenuName(String menuName) {
         return Arrays.stream(values())
                 .filter(menu -> menu.menuName.equals(menuName))
-                .findFirst().orElse(NOT_EXIST);
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(ERROR_INPUT_ORDER_MESSAGE.getMessage()));
     }
 
     public String getMenuName() {
@@ -43,9 +46,5 @@ public enum Menu {
 
     public Category getCategory() {
         return category;
-    }
-
-    public boolean isNotExist() {
-        return this == NOT_EXIST;
     }
 }
