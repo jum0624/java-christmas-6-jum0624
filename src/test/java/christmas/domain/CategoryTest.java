@@ -13,7 +13,7 @@ public class CategoryTest {
     @DisplayName("음료 카테고리만 존재하는지 확인한다.")
     public void isOnlyDrinkTest() throws Exception {
         // given
-        Map<Menu, Integer> orderMenu = Map.of(Menu.MENU10, 1);
+        Map<Menu, Integer> orderMenu = Map.of(Menu.ZERO_COKE, 1);
 
         // when
         // then

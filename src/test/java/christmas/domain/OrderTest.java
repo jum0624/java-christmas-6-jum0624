@@ -65,7 +65,7 @@ public class OrderTest {
 
         // then
         Assertions.assertThat(order.getOrders()).isNotEmpty()
-                .containsKey(Menu.MENU4)
-                .containsKey(Menu.MENU5);
+                .containsKey(Menu.T_BONE_STEAK)
+                .containsKey(Menu.BBQ_RIBS);
     }
 }

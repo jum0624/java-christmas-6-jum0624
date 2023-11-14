@@ -1,6 +1,6 @@
 package christmas.view;
 
-import christmas.domain.Badge;
+import christmas.domain.event.Badge;
 import christmas.domain.order.Menu;
 
 import java.util.Map;

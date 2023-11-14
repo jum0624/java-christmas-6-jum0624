@@ -1,8 +1,8 @@
 package christmas.service;
 
-import christmas.domain.Badge;
-import christmas.domain.Date;
-import christmas.domain.DiscountResult;
+import christmas.domain.event.Badge;
+import christmas.domain.order.Date;
+import christmas.domain.event.DiscountResult;
 import christmas.domain.order.Order;
 
 public class OrderService {

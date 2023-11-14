@@ -1,7 +1,7 @@
 package christmas.config;
 
-import christmas.domain.DiscountResult;
-import christmas.domain.discountPolicy.*;
+import christmas.domain.event.DiscountResult;
+import christmas.domain.event.discountPolicy.*;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,8 +1,8 @@
 package christmas.controller;
 
-import christmas.domain.Badge;
-import christmas.domain.Date;
-import christmas.domain.DiscountResult;
+import christmas.domain.event.Badge;
+import christmas.domain.order.Date;
+import christmas.domain.event.DiscountResult;
 import christmas.domain.order.Order;
 import christmas.service.OrderService;
 import christmas.util.InputUtil;

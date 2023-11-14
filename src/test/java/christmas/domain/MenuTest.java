@@ -16,6 +16,6 @@ public class MenuTest {
         Menu orderedMenu = Menu.findByMenuName(menu);
 
         // then
-        Assertions.assertThat(orderedMenu).isEqualTo(Menu.MENU1);
+        Assertions.assertThat(orderedMenu).isEqualTo(Menu.PINE_MUSHROOM_SOUP);
     }
 }

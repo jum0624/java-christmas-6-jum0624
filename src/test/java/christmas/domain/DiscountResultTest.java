@@ -1,6 +1,8 @@
 package christmas.domain;
 
 import christmas.config.ApplicationConfig;
+import christmas.domain.event.DiscountResult;
+import christmas.domain.order.Date;
 import christmas.domain.order.Order;
 import christmas.service.OrderService;
 import christmas.util.InputUtil;
@@ -10,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
-public class DiscountTest {
+public class DiscountResultTest {
     private final ApplicationConfig applicationConfig = new ApplicationConfig();
     private final OrderService orderService = new OrderService(applicationConfig.discountPolicy());
     @Test

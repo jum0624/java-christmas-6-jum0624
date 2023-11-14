@@ -1,6 +1,6 @@
-package christmas.domain.discountPolicy;
+package christmas.domain.event.discountPolicy;
 
-import christmas.domain.Date;
+import christmas.domain.order.Date;
 import christmas.domain.order.Order;
 
 public interface DiscountPolicy {

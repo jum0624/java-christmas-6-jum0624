@@ -1,6 +1,6 @@
-package christmas.domain.discountPolicy;
+package christmas.domain.event.discountPolicy;
 
-import christmas.domain.Date;
+import christmas.domain.order.Date;
 import christmas.domain.order.Menu;
 import christmas.domain.order.Order;
 
@@ -26,7 +26,7 @@ public class GiveawayDiscountPolicy implements DiscountPolicy {
     @Override
     public int discount(Date date, Order order) {
         if (isDiscount(order.getTotalPrice()) && isPriceOver(order.getTotalPrice())) {
-            order.updateOrder(Menu.MENU12);
+            order.updateOrder(Menu.CHAMPAGNE);
             return price;
         }
         return 0;
