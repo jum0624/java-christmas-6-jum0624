@@ -1,7 +1,7 @@
 package christmas.view;
 
 import christmas.domain.Badge;
-import christmas.domain.Menu;
+import christmas.domain.order.Menu;
 
 import java.util.Map;
 
@@ -12,6 +12,7 @@ public class OutputView {
         System.out.print(PRINT_ORDER_MENU_MESSAGE.getMessage());
         orders.entrySet().forEach(order ->
                 System.out.printf(PRINT_CONTENT_AND_COUNT.getMessage(), order.getKey().getMenuName(), order.getValue()));
+        System.out.println();
     }
 
     public void showBeforeDiscountTotalPrice(int price) {
@@ -28,13 +29,9 @@ public class OutputView {
 
     public void showBenefitDetails(Map<String, Integer> benefitDetails) {
         System.out.print(PRINT_DISCOUNT_LIST_MESSAGE.getMessage());
-        for (Map.Entry<String, Integer> benefit : benefitDetails.entrySet()
-        ) {
-            if (benefit.getKey() == null) {
-                System.out.print("없음");
-                break;
-            }
-            System.out.printf("%s : %,d원\n", benefit.getKey(), benefit.getValue());
+        if (benefitDetails.isEmpty()) System.out.print(NO_VALUE.getMessage());
+        for (Map.Entry<String, Integer> benefit : benefitDetails.entrySet()) {
+            System.out.printf(PRINT_DISCOUNT_LIST.getMessage(), benefit.getKey(), benefit.getValue());
         }
         System.out.println();
     }
