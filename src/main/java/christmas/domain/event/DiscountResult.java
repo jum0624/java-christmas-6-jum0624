@@ -1,7 +1,7 @@
 package christmas.domain.event;
 
 import christmas.domain.event.discountPolicy.DiscountPolicy;
-import christmas.domain.order.Date;
+import christmas.domain.Date.Date;
 import christmas.domain.order.Menu;
 import christmas.domain.order.Order;
 

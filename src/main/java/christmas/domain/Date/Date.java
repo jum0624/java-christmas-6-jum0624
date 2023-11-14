@@ -1,4 +1,4 @@
-package christmas.domain.order;
+package christmas.domain.Date;
 
 import java.time.LocalDate;
 

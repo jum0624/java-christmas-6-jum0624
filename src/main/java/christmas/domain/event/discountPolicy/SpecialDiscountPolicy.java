@@ -1,7 +1,7 @@
 package christmas.domain.event.discountPolicy;
 
-import christmas.domain.event.Calender;
-import christmas.domain.order.Date;
+import christmas.domain.Date.Calender;
+import christmas.domain.Date.Date;
 import christmas.domain.order.Order;
 
 import static christmas.constant.StringConstant.SPECIAL_DISCOUNT_POLICY;

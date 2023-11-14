@@ -2,7 +2,7 @@ package christmas.domain;
 
 import christmas.config.ApplicationConfig;
 import christmas.domain.event.DiscountResult;
-import christmas.domain.order.Date;
+import christmas.domain.Date.Date;
 import christmas.domain.order.Order;
 import christmas.service.OrderService;
 import christmas.util.InputUtil;
